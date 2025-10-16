@@ -8,13 +8,10 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Checkout code using GitHub PAT stored in Jenkins
-                withCredentials([usernamePassword(credentialsId: 'gitrepoid', 
-                                                 usernameVariable: 'GIT_USER', 
-                                                 passwordVariable: 'GIT_TOKEN')]) {
-                    git branch: 'main', 
-                        url: "https://${GIT_USER}:${GIT_TOKEN}@github.com/aparn-ah/finacplus.git"
-                }
+                // Checkout code using SSH key stored in Jenkins
+                git branch: 'main',
+                    url: 'git@github.com:aparn-ah/finacplus.git',
+                    credentialsId: 'jenkins_ssh_key'
             }
         }
 
