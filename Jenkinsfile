@@ -38,8 +38,8 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'newkubeconfig', variable: 'KUBECONFIG_FILE')]) {
                     sh '''
-                        export KUBECONFIG=/var/lib/jenkins/.minikube/profiles/minikube/client.key
-                        kubectl set image deployment/finacplus-app finacplus-app=$DOCKER_HUB_REPO:$BUILD_NUMBER --record || kubectl apply -f k8s-deployment.yaml
+                       export KUBECONFIG=/var/lib/jenkins/.kube/config
+                       kubectl set image deployment/finacplus-app finacplus-app=$DOCKER_HUB_REPO:$BUILD_NUMBER || kubectl apply -f k8s-deployment.yaml
                     '''
                 }
             }
