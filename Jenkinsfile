@@ -11,7 +11,7 @@ pipeline {
                 // Checkout code using SSH key stored in Jenkins
                 git branch: 'main',
                     url: 'git@github.com:aparn-ah/finacplus.git',
-                    credentialsId: 'jenkins_ssh_key'
+                    credentialsId: 'github_pat'
             }
         }
 
