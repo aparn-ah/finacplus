@@ -36,7 +36,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig-prod-cluster', variable: 'KUBECONFIG_FILE')]) {
+                withCredentials([file(credentialsId: 'newkubeconfig', variable: 'KUBECONFIG_FILE')]) {
                     sh '''
                         export KUBECONFIG=$KUBECONFIG_FILE
                         kubectl set image deployment/finacplus-app finacplus-app=$DOCKER_HUB_REPO:$BUILD_NUMBER --record || kubectl apply -f k8s-deployment.yaml
