@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finacplus-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: finacplus-app
+  template:
+    metadata:
+      labels:
+        app: finacplus-app
+    spec:
+      containers:
+      - name: finacplus-app
+        image: aparnahh/finacplus:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finacplus-service
+spec:
+  selector:
+    app: finacplus-app
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+
